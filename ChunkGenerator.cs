@@ -10,7 +10,7 @@ public class ChunkGenerator : MonoBehaviour
     public MeshCollider meshCollider;
     public Gradient gradient;
     [Range(0, 6)]
-    public int details; //jak bardzo trojkatna
+    public int details; //how very triangular
     public float scale;
     public float height;
     public AnimationCurve regionsHeightCurve;
