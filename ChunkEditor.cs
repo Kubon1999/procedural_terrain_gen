@@ -11,7 +11,7 @@ public class ChunkEditor : Editor
         ChunkGenerator mapGen = (ChunkGenerator)target;
         if (DrawDefaultInspector())
         {
-                mapGen.GenerateMap();
+                mapGen.GenerateMapData();
         }
     }
 }

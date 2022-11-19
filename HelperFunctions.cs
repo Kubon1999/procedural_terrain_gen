@@ -2,8 +2,6 @@ using UnityEngine;
 
 public class HelperFunctions : MonoBehaviour
 {
-    static float maxHeight = float.MinValue;
-    static float minHeight = float.MaxValue;
 
     public static float[,] GenerateNoiseMap(int mapWidth, int mapHeight, int seed, float scale, int octavesNr, float persistance, float lacunarity, Vector2 mapOffset)
     {
@@ -12,6 +10,9 @@ public class HelperFunctions : MonoBehaviour
         var octaveOffsets = GetOctaveOffsets(mapOffset, octavesNr, seed);
         float halfWidth = mapWidth / 2.0f;
         float halfHeight = mapHeight / 2.0f;
+
+        float maxHeight = float.MinValue;
+        float minHeight = float.MaxValue;
 
         for (int height = 0; height < mapHeight; height++)
         {
@@ -45,7 +46,7 @@ public class HelperFunctions : MonoBehaviour
                 noiseMap[width, height] = noiseHeight;
             }
         }
-        return NormalizeNoiseMap(noiseMap, mapHeight, mapWidth);
+        return NormalizeNoiseMap(noiseMap, mapHeight, mapWidth, minHeight, maxHeight);
     }
 
     private static Vector2[] GetOctaveOffsets(Vector2 offset, int octaves, int seed)
@@ -61,7 +62,7 @@ public class HelperFunctions : MonoBehaviour
         return octaveOffsets;
     }
 
-    private static float[,] NormalizeNoiseMap(float[,] noiseMap, int mapHeight, int mapWidth)
+    private static float[,] NormalizeNoiseMap(float[,] noiseMap, int mapHeight, int mapWidth, float minHeight, float maxHeight)
     {
         for (int height = 0; height < mapHeight; height++)
         {
